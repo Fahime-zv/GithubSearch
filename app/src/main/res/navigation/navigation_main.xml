@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_main"
-    app:startDestination="@id/searchFragment">
+    android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.fahimezv.githubsearch.presentation.ui.search.SearchFragment"
-        android:label="SearchFragment" />
-</navigation>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_main" />
+</LinearLayout>
