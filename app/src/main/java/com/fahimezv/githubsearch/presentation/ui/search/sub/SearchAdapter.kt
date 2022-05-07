@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.fahimezv.githubSearch.presentation.ui.common.animation.BounceClickEffectAnimator
 import com.fahimezv.githubsearch.R
 import com.fahimezv.githubsearch.core.entity.Search
 import com.fahimezv.githubsearch.presentation.OnUserClickListener
@@ -58,19 +59,20 @@ private val onItemClick: OnUserClickListener
 
             init {
                 itemView.setOnClickListener(this)
+                // For click animation
+                BounceClickEffectAnimator(view)
+
             }
 
             override fun onClick(view: View?) {
                 onItemClick(list[adapterPosition])
             }
 
-
             fun bind(context: Context, position: Int) {
                 imageView.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
                 ImageLoaderUtils.with(context).placeholder(R.drawable.noimage)
                     .load(list[position].avatarUrl)
                     .into(imageView)
-
                 githubLinkTextView.text = "Github Link: ${list[position].htmLUrl}"
                 userNameTextView.text = "${list[position].login}"
             }
