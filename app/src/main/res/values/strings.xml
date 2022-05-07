@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GithubSearch</string>
+    <string name="anErrorOccurred">"An error occurred while processing the request."</string>
+
 </resources>
