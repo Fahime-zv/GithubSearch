@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fahimezv.githubsearch.presentation.ui.search.sub.SearchAdapter
 import com.fahimezv.githubsearch.R
 import com.fahimezv.githubsearch.presentation.architecture.BaseFragmentVMState
+import com.fahimezv.githubsearch.presentation.ui.common.RecyclerViewDecorations
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchFragment: BaseFragmentVMState<SearchViewModel>() {
@@ -38,7 +40,7 @@ class SearchFragment: BaseFragmentVMState<SearchViewModel>() {
             isVisible = false
         }
 
-        recyclerView = view.findViewById<RecyclerView?>(R.id.postList_recyclerView).apply {
+        recyclerView = view.findViewById<RecyclerView?>(R.id.searchList_recyclerView).apply {
 
             isVisible = false
 
@@ -49,6 +51,12 @@ class SearchFragment: BaseFragmentVMState<SearchViewModel>() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = searchAdapter
 
+            addItemDecoration(
+                RecyclerViewDecorations.NoLastItemDividerDecorator(
+                    requireContext(),
+                    LinearLayout.VERTICAL
+                )
+            )
         }
 
 
