@@ -2,6 +2,7 @@ package com.fahimezv.githubsearch
 
 import android.app.Application
 import com.fahimezv.githubsearch.data.dataModule
+import com.fahimezv.githubsearch.presentation.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
@@ -14,7 +15,7 @@ class App : Application() {
         GlobalContext.startKoin {
             androidLogger(Level.ERROR) // Koin Android Logger
             androidContext(this@App) // Inject Android context
-            modules(dataModule) // Modules
+            modules(dataModule, presentationModule) // Modules
         }
     }
 
