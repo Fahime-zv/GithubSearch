@@ -2,6 +2,7 @@ package com.fahimezv.githubsearch.data
 
 import com.fahimezv.githubsearch.BuildConfig
 import com.fahimezv.githubsearch.data.network.generator.*
+import com.fahimezv.githubsearch.data.network.repository.SearchRepository
 import com.fahimezv.githubsearch.data.network.service.ServiceProvider
 import com.fahimezv.githubsearch.data.network.service.ServiceProviderImpl
 import okhttp3.logging.HttpLoggingInterceptor
@@ -61,6 +62,9 @@ val dataModule = module {
     factory {
         NetworkEnvironmentImpl()
     }
-
+    // ------------- Repositories -------------
+    factory {
+        SearchRepository(serviceProvider = get())
+    }
 }
 
