@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.annotation.CallSuper
-import com.fahimezv.githubSearch.presentation.architecture.BaseViewModelState
 import com.fahimezv.githubsearch.presentation.extentions.TAG
 
 
