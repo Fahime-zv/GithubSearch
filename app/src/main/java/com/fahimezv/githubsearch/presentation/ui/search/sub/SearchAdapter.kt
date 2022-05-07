@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fahimezv.githubsearch.R
 import com.fahimezv.githubsearch.core.entity.Search
 import com.fahimezv.githubsearch.presentation.OnUserClickListener
+import com.fahimezv.githubsearch.presentation.ui.util.ImageLoaderUtils
 import com.google.android.material.imageview.ShapeableImageView
 
 class SearchAdapter (
@@ -65,6 +66,10 @@ private val onItemClick: OnUserClickListener
 
 
             fun bind(context: Context, position: Int) {
+                imageView.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+                ImageLoaderUtils.with(context).placeholder(R.drawable.noimage)
+                    .load(list[position].avatarUrl)
+                    .into(imageView)
 
                 githubLinkTextView.text = "Github Link: ${list[position].htmLUrl}"
                 userNameTextView.text = "${list[position].login}"
