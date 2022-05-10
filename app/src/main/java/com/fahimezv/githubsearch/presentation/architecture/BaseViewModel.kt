@@ -1,6 +1,7 @@
 package com.fahimezv.githubsearch.presentation.architecture
 
 import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 
@@ -50,5 +51,27 @@ abstract class BaseViewModel : ViewModel() {
      * successToast("Password has been changed.")
      *
      * */
+    private val toastLiveData = SingleEventLiveData<ToastCommand>()
+    fun getToastCommandsLiveData(): LiveData<ToastCommand> = toastLiveData
+
+    @VisibleForTesting
+    fun successToast(msg: String) {
+        toastLiveData.postValue(ToastCommand(msg, ToastCommand.Type.Success))
+    }
+
+    @VisibleForTesting
+    fun errorToast(msg: String) {
+        toastLiveData.postValue(ToastCommand(msg, ToastCommand.Type.Error))
+    }
+
+    @VisibleForTesting
+    fun warningToast(msg: String) {
+        toastLiveData.postValue(ToastCommand(msg, ToastCommand.Type.Warning))
+    }
+
+    @VisibleForTesting
+    fun infoToast(msg: String) {
+        toastLiveData.postValue(ToastCommand(msg, ToastCommand.Type.Info))
+    }
 
 }
