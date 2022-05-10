@@ -8,11 +8,11 @@ class UserRepository(
     serviceProvider: ServiceProvider
 ) : BaseRepository() {
 
-    private val service = serviceProvider.getSearchService()
+    private val service = serviceProvider.getUserService()
 
-    suspend fun search(term: String): Result<Search> {
+    suspend fun userInfo(userName: String): Result<Search.User> {
         return safeApiCall {
-            service.search(term = term)
+            service.userInfo(userName = userName)
         }
     }
 }

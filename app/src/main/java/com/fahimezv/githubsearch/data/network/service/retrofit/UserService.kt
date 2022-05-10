@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface UserService {
     @GET("users/{username}")
-    suspend fun search(
-        @Path("username") term: String
-    ): SearchDAO
+    suspend fun userInfo(
+        @Path("username") userName: String
+    ): SearchDAO.UserDAO
 }

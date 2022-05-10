@@ -23,6 +23,7 @@ import com.fahimezv.githubsearch.R
 import com.fahimezv.githubsearch.presentation.architecture.BaseFragmentVMState
 import com.fahimezv.githubsearch.presentation.extentions.TAG
 import com.fahimezv.githubsearch.presentation.ui.common.RecyclerViewDecorations
+import com.fahimezv.githubsearch.presentation.ui.userinfo.UserInfoFragmentArgs
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,8 +60,8 @@ class SearchFragment : BaseFragmentVMState<SearchViewModel>() {
 
             isVisible = false
 
-            searchAdapter = SearchAdapter {
-
+            searchAdapter = SearchAdapter { user ->
+                navigate(SearchFragmentDirections.actionSearchFragmentToUserInfoFragment(user.login))
             }
 
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
     app:startDestination="@id/searchFragment">
 
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.fahimezv.githubsearch.presentation.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.fahimezv.githubsearch.presentation.ui.userinfo.UserInfoFragment"
+        android:label="fragment_user_info"
+        tools:layout="@layout/fragment_user_info" >
+        <argument
+            android:name="userName"
+            app:argType="string"/>
+    </fragment>
 </navigation>

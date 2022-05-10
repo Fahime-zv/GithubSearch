@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.fahimezv.githubSearch.presentation.ui.common.animation.BounceClickEffectAnimator
+import com.fahimezv.githubsearch.presentation.ui.common.animation.BounceClickEffectAnimator
 import com.fahimezv.githubsearch.R
 import com.fahimezv.githubsearch.core.entity.Search
 import com.fahimezv.githubsearch.presentation.OnUserClickListener

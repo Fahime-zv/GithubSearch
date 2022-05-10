@@ -1,4 +1,4 @@
-package com.fahimezv.githubSearch.presentation.ui.common.animation
+package com.fahimezv.githubsearch.presentation.ui.common.animation
 
 
 import android.animation.AnimatorSet
