@@ -5,7 +5,7 @@ import com.fahimezv.githubsearch.R
 import com.fahimezv.githubsearch.presentation.architecture.BaseViewModel
 import com.fahimezv.githubsearch.presentation.architecture.NavigationCommand
 import com.fahimezv.githubsearch.presentation.architecture.ToastCommand
-import com.fahimezv.githubsearch.presentation.ui.search.SearchFragmentDirections
+import com.fahimezv.githubsearch.presentation.ui.screen.search.SearchFragmentDirections
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Test
