@@ -17,12 +17,12 @@
 
 
         <TextView
-            android:id="@+id/error_textView"
+            android:id="@+id/empty_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/anErrorOccurred" />
+            android:text="@string/emptyResult" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchList_recyclerView"

@@ -1,4 +1,4 @@
-package com.fahimezv.githubsearch.presentation.ui.userinfo
+package com.fahimezv.githubsearch.presentation.ui.screen.userinfo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -37,18 +37,20 @@ class UserInfoFragment : BaseFragmentVMState<UserInfoViewModel>() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_info, container, false)
+        val view= inflater.inflate(R.layout.fragment_user_info, container, false)
 
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         avatarImageView = view.findViewById(R.id.avatar_imageView)
         infoTextView = view.findViewById(R.id.info_TextView)
         companyTextView = view.findViewById(R.id.company_TextView)
         addressTextView = view.findViewById(R.id.address_TextView)
         loading = view.findViewById(R.id.loading_progressbar)
+
+        return  view
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         viewModel.getUserLiveData().observe(viewLifecycleOwner) {user->
             ImageLoaderUtils.with(requireContext()).placeholder(R.drawable.noimage)
@@ -68,6 +70,9 @@ class UserInfoFragment : BaseFragmentVMState<UserInfoViewModel>() {
 
     }
 
+    override fun onEmpty() {
+        //Nothing
+    }
 
     override fun onData() {
         loading.isVisible=false

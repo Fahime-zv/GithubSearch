@@ -1,4 +1,4 @@
-package com.fahimezv.githubsearch.presentation.ui.userinfo
+package com.fahimezv.githubsearch.presentation.ui.screen.userinfo
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -33,6 +33,7 @@ class UserInfoViewModel(
             with(userRepository.userInfo(userName = userName)) {
                 when (this) {
                     is Result.Data -> {
+
                         userLiveData.postValue(this.model)
                         uiState(UiState.Data)
                         Log.d(
@@ -42,6 +43,7 @@ class UserInfoViewModel(
                     }
                     is Result.NetworkError -> {
                         uiState(UiState.NetworkError)
+
                     }
                 }
             }
