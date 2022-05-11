@@ -1,4 +1,4 @@
-package com.fahimezv.githubsearch.presentation.ui.search
+package com.fahimezv.githubsearch.presentation.ui.screen.search
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -15,7 +15,8 @@ import com.fahimezv.githubsearch.presentation.extentions.TAG
 import kotlinx.coroutines.Job
 
 class SearchViewModel(
-    private val searchRepository: SearchRepository
+    private val searchRepository: SearchRepository,
+    private val networkErrorMsg: String
 ) :
     BaseViewModelState() {
 
@@ -34,12 +35,19 @@ class SearchViewModel(
             with(searchRepository.search(term = term)) {
                 when (this) {
                     is Result.Data -> {
-                        searchLiveData.postValue(this.model)
-                        uiState(UiState.Data)
-                        Log.d(this@SearchViewModel.TAG, "requestSearch: ${this.model}")
+                        if (this.model.totalCount == 0) {
+                            uiState(UiState.Empty)
+
+                        } else {
+                            searchLiveData.postValue(this.model)
+                            uiState(UiState.Data)
+                            Log.d(this@SearchViewModel.TAG, "requestSearch: ${this.model}")
+                        }
+
                     }
                     is Result.NetworkError -> {
                         uiState(UiState.NetworkError)
+                        errorToast(networkErrorMsg)
                     }
                 }
             }

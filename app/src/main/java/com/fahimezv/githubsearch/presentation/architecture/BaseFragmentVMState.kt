@@ -24,6 +24,7 @@ abstract class BaseFragmentVMState<VM : BaseViewModelState> : BaseFragmentVM<VM>
             when (it) {
                 UiState.Loading -> onLoading()
                 UiState.Data -> onData()
+                UiState.Empty -> onEmpty()
                 UiState.NetworkError -> onNetworkError()
 
             }
@@ -32,6 +33,7 @@ abstract class BaseFragmentVMState<VM : BaseViewModelState> : BaseFragmentVM<VM>
 
     abstract fun onLoading()
     abstract fun onData()
+    abstract fun onEmpty()
     abstract fun onNetworkError()
 
 }
