@@ -2,7 +2,7 @@
     <string name="app_name">GithubSearch</string>
     <string name="anErrorOccurred">"An error occurred while processing the request."</string>
     <string name="emptyResult">"Doesn't item fount."</string>
-    <string name="searchUser">"Enter user"</string>
+    <string name="searchUser">"Search user..."</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

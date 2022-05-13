@@ -7,6 +7,7 @@ import retrofit2.http.Query
 interface SearchService {
     @GET("search/users")
     suspend fun search(
-        @Query("q") term: String
+        @Query("q") term: String,
+        @Query("page") page:Int?
     ): SearchDAO
 }

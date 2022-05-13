@@ -9,8 +9,8 @@ val presentationModule = module {
     //****************************************
     //              ViewModels               *
     //****************************************/
-    viewModel {parameters->
-        SearchViewModel(searchRepository = get(),networkErrorMsg = parameters.get())
+    viewModel {
+        SearchViewModel(searchRepository = get())
     }
 
     viewModel {parameters->

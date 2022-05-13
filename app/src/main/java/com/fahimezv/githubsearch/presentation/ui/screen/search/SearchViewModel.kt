@@ -5,55 +5,33 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import androidx.paging.liveData
 import kotlinx.coroutines.launch
 import com.fahimezv.githubsearch.core.entity.Search
 import com.fahimezv.githubsearch.data.network.repository.SearchRepository
 import com.fahimezv.githubsearch.presentation.architecture.BaseViewModelState
-import com.fahimezv.githubsearch.presentation.architecture.UiState
-import com.fahimezv.githubsearch.data.network.model.Result
-import com.fahimezv.githubsearch.presentation.extentions.TAG
-import kotlinx.coroutines.Job
+import com.fahimezv.githubsearch.presentation.ui.screen.search.paging.UserPagingSource
 
 class SearchViewModel(
     private val searchRepository: SearchRepository,
-    private val networkErrorMsg: String
 ) :
     BaseViewModelState() {
 
-    private var job: Job? = null
 
-    private val searchLiveData = MutableLiveData<Search>()
-    fun getSearchListLiveData(): LiveData<Search> = searchLiveData
+    private lateinit var pagingSource: UserPagingSource
 
-    @SuppressLint("VisibleForTests")
-    fun requestSearch(term: String) {
+    private  var term: String=""
 
-        job?.cancel()
-
-        job = viewModelScope.launch {
-            uiState(UiState.Loading)
-            with(searchRepository.search(term = term)) {
-                when (this) {
-                    is Result.Data -> {
-                        if (this.model.totalCount == 0) {
-                            uiState(UiState.Empty)
-
-                        } else {
-                            searchLiveData.postValue(this.model)
-                            uiState(UiState.Data)
-                            Log.d(this@SearchViewModel.TAG, "requestSearch: ${this.model}")
-                        }
-
-                    }
-                    is Result.NetworkError -> {
-                        uiState(UiState.NetworkError)
-                        errorToast(networkErrorMsg)
-                    }
-                }
-            }
-
-        }
-
+    fun setTermSearch(term:String){
+        this.term =term
     }
+
+    val usersLiveData = Pager(PagingConfig(pageSize = 30, initialLoadSize = 1)) {
+        pagingSource = UserPagingSource(term,searchRepository)
+        pagingSource
+    }.liveData.cachedIn(viewModelScope)
 
 }

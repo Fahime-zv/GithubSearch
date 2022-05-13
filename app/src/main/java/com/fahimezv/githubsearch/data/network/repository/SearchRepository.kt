@@ -10,9 +10,9 @@ class SearchRepository(
 
     private val service = serviceProvider.getSearchService()
 
-    suspend fun search(term: String): Result<Search> {
+    suspend fun search(term: String,pageIndex:Int? = null): Result<Search> {
         return safeApiCall {
-            service.search(term = term)
+            service.search(term = term,page = pageIndex)
         }
     }
 }

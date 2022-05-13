@@ -18,11 +18,8 @@ import com.fahimezv.githubsearch.presentation.ui.util.ImageLoaderUtils
 import com.google.android.material.imageview.ShapeableImageView
 
 class SearchAdapter(
-
     private val onItemClick: OnUserClickListener
 ) : PagingDataAdapter<Search.User, SearchAdapter.ViewHolder>(SearchComparator) {
-
-    private val list = mutableListOf<Search.User>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,23 +30,13 @@ class SearchAdapter(
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         holder.bind(holder.itemView.context, position)
 
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun bind(posts: List<Search.User>) {
-        list.clear()
-        list.addAll(posts)
-        notifyDataSetChanged()
-
-    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         private var imageView: ShapeableImageView = view.findViewById(R.id.avatar_imageView)
@@ -63,20 +50,22 @@ class SearchAdapter(
             itemView.setOnClickListener(this)
             // For click animation
             BounceClickEffectAnimator(view)
-
         }
 
         override fun onClick(view: View?) {
-            onItemClick(list[adapterPosition])
+            getItem(bindingAdapterPosition)?.let { onItemClick.invoke(it) }
         }
 
+        @SuppressLint("SetTextI18n")
         fun bind(context: Context, position: Int) {
-            imageView.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
-            ImageLoaderUtils.with(context).placeholder(R.drawable.noimage)
-                .load(list[position].avatarUrl)
-                .into(imageView)
-            githubLinkTextView.text = "Github Link: ${list[position].htmLUrl}"
-            userNameTextView.text = "${list[position].login}"
+            getItem(position)?.let { user ->
+                imageView.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+                ImageLoaderUtils.with(context).placeholder(R.drawable.noimage)
+                    .load(user.avatarUrl)
+                    .into(imageView)
+                githubLinkTextView.text = "Github Link: ${user.htmLUrl}"
+                userNameTextView.text = user.login
+            }
         }
     }
 
